@@ -21,6 +21,7 @@ jobs:
 
       - name: Create file with current date and time
         run: |
+          cat $GITHUB_EVENT_PATH
           FILE_NAME="depandabot.txt"
           echo $(date +'%Y-%m-%d-%H-%M-%S') > "$FILE_NAME"
           echo "Created $FILE_NAME"
