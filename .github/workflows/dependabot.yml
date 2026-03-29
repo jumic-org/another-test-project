@@ -1,0 +1,35 @@
+name: Dependabot
+
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto merge
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'jumic-org/another-test-project'
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create file with current date and time
+        run: |
+          FILE_NAME="depandabot$(date +'%Y-%m-%d-%H-%M-%S')"
+          touch "$FILE_NAME"
+          echo "Created $FILE_NAME"
+
+      - name: Commit file to PR
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "Add dependabot timestamp file"
+          git push
