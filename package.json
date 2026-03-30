@@ -25,6 +25,6 @@
     "constructs": "^10.5.0",
     "minimatch": "^10.2.4",
     "mppx": "^0.4.10",
-    "picomatch": "^4.0.0"
+    "picomatch": "^4.0.4"
   }
 }
